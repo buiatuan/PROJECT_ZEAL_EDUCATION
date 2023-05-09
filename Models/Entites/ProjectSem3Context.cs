@@ -61,6 +61,9 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.CreatedDate)
                 .HasColumnType("datetime")
                 .HasColumnName("createdDate");
+            entity.Property(e => e.DateOfbirth)
+                .HasColumnType("datetime")
+                .HasColumnName("dateOfbirth");
             entity.Property(e => e.Descreption)
                 .HasMaxLength(300)
                 .HasColumnName("descreption");
