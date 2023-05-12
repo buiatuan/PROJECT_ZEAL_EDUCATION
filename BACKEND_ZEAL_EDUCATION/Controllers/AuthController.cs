@@ -1,7 +1,7 @@
 ﻿using Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Models.Entites;
+using Models.Entities;
 using Models.Models.Request;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers;

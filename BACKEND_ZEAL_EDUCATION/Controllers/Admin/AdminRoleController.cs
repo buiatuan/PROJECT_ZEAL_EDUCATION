@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Models.Entites;
+using Models.Entities;
 using System.Data;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin

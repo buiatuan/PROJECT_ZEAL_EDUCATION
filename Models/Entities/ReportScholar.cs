@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Models.Entites;
+namespace Models.Entities;
 
-public partial class Faculty
+public partial class ReportScholar
 {
     public int Id { get; set; }
 
     public string? Name { get; set; }
 
-    public string? FacultyCode { get; set; }
+    public string? Path { get; set; }
 
-    public string? Descreption { get; set; }
+    public string? Type { get; set; }
+
+    public int? ScholarId { get; set; }
 
     public DateTime? CreatedDate { get; set; }
 
@@ -21,5 +23,5 @@ public partial class Faculty
 
     public string? UpdatedBy { get; set; }
 
-    public virtual ICollection<Scholar> Scholars { get; set; } = new List<Scholar>();
+    public virtual Scholar? Scholar { get; set; }
 }
