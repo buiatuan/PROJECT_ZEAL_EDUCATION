@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using Microsoft.EntityFrameworkCore;
 
-namespace Models.Entites;
+namespace Models.Entities;
 
 public partial class ProjectSem3Context : DbContext
 {
@@ -22,6 +21,8 @@ public partial class ProjectSem3Context : DbContext
     public virtual DbSet<BatchCourse> BatchCourses { get; set; }
 
     public virtual DbSet<Course> Courses { get; set; }
+
+    public virtual DbSet<Event> Events { get; set; }
 
     public virtual DbSet<Exam> Exams { get; set; }
 
@@ -181,6 +182,10 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.Descreption)
                 .HasColumnType("text")
                 .HasColumnName("descreption");
+            entity.Property(e => e.Image)
+                .HasMaxLength(150)
+                .IsUnicode(false)
+                .HasColumnName("image");
             entity.Property(e => e.Name)
                 .HasMaxLength(150)
                 .HasColumnName("name");
@@ -194,6 +199,32 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.UpdatedDate)
                 .HasColumnType("datetime")
                 .HasColumnName("updatedDate");
+        });
+
+        modelBuilder.Entity<Event>(entity =>
+        {
+            entity.ToTable("event");
+
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("id");
+            entity.Property(e => e.CreatedBy)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("createdBy");
+            entity.Property(e => e.CreatedDate)
+                .HasColumnType("datetime")
+                .HasColumnName("createdDate");
+            entity.Property(e => e.Location)
+                .HasMaxLength(200)
+                .HasColumnName("location");
+            entity.Property(e => e.Name)
+                .HasMaxLength(200)
+                .HasColumnName("name");
+            entity.Property(e => e.StartDate)
+                .HasColumnType("datetime")
+                .HasColumnName("startDate");
+            entity.Property(e => e.Status).HasColumnName("status");
         });
 
         modelBuilder.Entity<Exam>(entity =>
@@ -342,6 +373,10 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.AccountId).HasColumnName("accountId");
             entity.Property(e => e.BatchId).HasColumnName("batchId");
             entity.Property(e => e.FacultyId).HasColumnName("facultyId");
+            entity.Property(e => e.ScholarCode)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("scholarCode");
 
             entity.HasOne(d => d.Account).WithMany(p => p.Scholars)
                 .HasForeignKey(d => d.AccountId)

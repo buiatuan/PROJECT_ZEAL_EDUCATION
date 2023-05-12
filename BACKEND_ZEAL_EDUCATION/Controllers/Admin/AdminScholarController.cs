@@ -1,12 +1,10 @@
 ﻿using Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Models.Entites;
+using Models.Entities;
 using Models.Models.Request.ScholarRequest;
 using Models.Models.Response.ScholarRequest;
 using Models.Models.Response.ScholarResponse;
-using System.Net;
-using System.Reflection;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Models.Entites;
+namespace Models.Entities;
 
 public partial class Course
 {
@@ -24,6 +24,8 @@ public partial class Course
     public DateTime? UpdatedDate { get; set; }
 
     public string? UpdatedBy { get; set; }
+
+    public string? Image { get; set; }
 
     public virtual ICollection<BatchCourse> BatchCourses { get; set; } = new List<BatchCourse>();
 

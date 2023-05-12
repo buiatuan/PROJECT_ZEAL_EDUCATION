@@ -1,4 +1,4 @@
-﻿using Models.Entites;
+﻿using Models.Entities;
 using Models.Models.Response.ScholarResponse;
 
 namespace Models.Models.Response.ScholarRequest

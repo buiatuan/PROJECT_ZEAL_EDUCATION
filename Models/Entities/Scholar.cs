@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Models.Entites;
+namespace Models.Entities;
 
 public partial class Scholar
 {
@@ -12,6 +12,8 @@ public partial class Scholar
     public int? FacultyId { get; set; }
 
     public int? BatchId { get; set; }
+
+    public string? ScholarCode { get; set; }
 
     public virtual Account? Account { get; set; }
 

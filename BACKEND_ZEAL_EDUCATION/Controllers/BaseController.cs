@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Models.Entites;
+using Models.Entities;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers;
 
