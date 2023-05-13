@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace Models.Entities;
@@ -17,8 +18,6 @@ public partial class ProjectSem3Context : DbContext
     public virtual DbSet<Account> Accounts { get; set; }
 
     public virtual DbSet<Batch> Batches { get; set; }
-
-    public virtual DbSet<BatchCourse> BatchCourses { get; set; }
 
     public virtual DbSet<Course> Courses { get; set; }
 
@@ -137,27 +136,6 @@ public partial class ProjectSem3Context : DbContext
                 .HasColumnName("updatedDate");
         });
 
-        modelBuilder.Entity<BatchCourse>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__batchCou__3213E83F31DD89D2");
-
-            entity.ToTable("batchCourse");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.BatchId).HasColumnName("batchId");
-            entity.Property(e => e.CourseId).HasColumnName("courseId");
-            entity.Property(e => e.Point).HasColumnName("point");
-            entity.Property(e => e.Status).HasColumnName("status");
-
-            entity.HasOne(d => d.Batch).WithMany(p => p.BatchCourses)
-                .HasForeignKey(d => d.BatchId)
-                .HasConstraintName("FK__batchCour__batch__5441852A");
-
-            entity.HasOne(d => d.Course).WithMany(p => p.BatchCourses)
-                .HasForeignKey(d => d.CourseId)
-                .HasConstraintName("FK__batchCour__cours__5535A963");
-        });
-
         modelBuilder.Entity<Course>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__course__3213E83FCD280F61");
@@ -189,6 +167,7 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(150)
                 .HasColumnName("name");
+            entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.TuitionFees)
                 .HasColumnType("decimal(15, 8)")
                 .HasColumnName("tuitionFees");

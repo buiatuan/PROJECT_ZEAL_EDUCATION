@@ -25,7 +25,5 @@ public partial class Batch
 
     public string? UpdatedBy { get; set; }
 
-    public virtual ICollection<BatchCourse> BatchCourses { get; set; } = new List<BatchCourse>();
-
     public virtual ICollection<Scholar> Scholars { get; set; } = new List<Scholar>();
 }
