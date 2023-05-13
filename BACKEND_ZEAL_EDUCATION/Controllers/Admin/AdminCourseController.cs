@@ -92,7 +92,10 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         {
             var course = _dbContext.Courses.Find(id);
             if (course == null) return NotFound(Message.NOT_FOUND_COURSE);
-            return Ok(Message.SUCCESS);
+            course.Status = 0;
+            _dbContext.Courses.Update(course);
+            var eff = _dbContext.SaveChanges();
+            return eff > 0 ?  Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
         }
     }
 }

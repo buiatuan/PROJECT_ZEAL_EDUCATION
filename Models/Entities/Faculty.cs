@@ -21,5 +21,7 @@ public partial class Faculty
 
     public string? UpdatedBy { get; set; }
 
+    public int? Status { get; set; }
+
     public virtual ICollection<Scholar> Scholars { get; set; } = new List<Scholar>();
 }

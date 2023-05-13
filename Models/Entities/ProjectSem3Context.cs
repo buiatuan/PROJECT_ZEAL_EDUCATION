@@ -194,6 +194,9 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.CreatedDate)
                 .HasColumnType("datetime")
                 .HasColumnName("createdDate");
+            entity.Property(e => e.Description)
+                .HasColumnType("text")
+                .HasColumnName("description");
             entity.Property(e => e.Location)
                 .HasMaxLength(200)
                 .HasColumnName("location");
@@ -271,6 +274,7 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .HasColumnName("name");
+            entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.UpdatedBy)
                 .HasMaxLength(50)
                 .IsUnicode(false)

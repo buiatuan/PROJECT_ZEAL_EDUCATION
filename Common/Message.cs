@@ -12,5 +12,7 @@ namespace Common
         public static string FAILED = "Failed";
         public static string NOT_FOUND_SCHOLAR = "Not found scholar";
         public static string NOT_FOUND_COURSE = "Not found course";
+        public static string NOT_FOUND_EVENT = "Not found event";
+        public static string NOT_FOUND_FACUTLY = "Not found facutly";
     }
 }
