@@ -27,7 +27,7 @@ public partial class Course
 
     public string? Image { get; set; }
 
-    public virtual ICollection<BatchCourse> BatchCourses { get; set; } = new List<BatchCourse>();
+    public int? Status { get; set; }
 
     public virtual ICollection<Exam> Exams { get; set; } = new List<Exam>();
 
