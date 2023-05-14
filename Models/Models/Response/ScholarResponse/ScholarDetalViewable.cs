@@ -5,7 +5,7 @@ namespace Models.Models.Response.ScholarRequest
 {
     public class ScholarDetalViewable : ScholarBaseViewable
     {
-        public List<ScholarCourseViewable> CourseList { get; set; }
-        public List<ScholarExamViewable> Exams { get; set; }
+        public List<ScholarCourseViewable>? CourseList { get; set; }
+        public List<ScholarExamViewable>? Exams { get; set; }
     }
 }

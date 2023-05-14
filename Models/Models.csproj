@@ -20,4 +20,12 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Models\Request\RegisterRequest\" />
+    <None Remove="Models\Request\LoginRequest\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Request\RegisterRequest\" />
+    <Folder Include="Models\Request\LoginRequest\" />
+  </ItemGroup>
 </Project>
