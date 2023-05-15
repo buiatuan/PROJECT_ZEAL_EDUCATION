@@ -12,8 +12,6 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
             : base(dbContext, logger, config)
         {
         }
-
-        [HttpPost]
         
     }
 }

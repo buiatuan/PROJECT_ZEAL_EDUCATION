@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileSystemGlobbing;
 using Models.Entities;
+using Scholar_model = Models.Entities.Scholar;
 using Models.Models.Request.CourseRequest;
 using Models.Models.Response.CourseResponse;
 using static System.Net.Mime.MediaTypeNames;
@@ -45,7 +46,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
                 CreatedDate = course.CreatedDate ?? null,
                 UpdatedDate = course.UpdatedDate ?? null,
                 Image = course.Image ?? "",
-                Scholars = courseScholar.ToList() ?? new List<Scholar>(),
+                Scholars = courseScholar.ToList() ?? new List<Scholar_model>(),
             };
             return Ok(result);
         }
