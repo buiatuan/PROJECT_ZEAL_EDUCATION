@@ -3,19 +3,26 @@ namespace Models.Models.Request
 {
 	public class CourseRegisterModel
 	{
+        //account
+        public string NameScholar { get; set; } = null!;
+
+        public DateTime? DateOfbirth { get; set; }
+
         //scholar
-        public int? AccountId { get; set; }
+        public string ScholarCode { get; set; }
 
-        public int? FacultyId { get; set; }
+        //batch
+        public string? BatchName { get; set; }
 
-        public int? BatchId { get; set; }
-
-        public string? ScholarCode { get; set; }
+        //faculty
+        public string? FacultyName { get; set; }
 
         //course
-        public string? CourseCode { get; set; }
+        public string CourseCode { get; set; }
 
-        public string? Name { get; set; }
+        public string NameCourse { get; set; }
+
+        public string? ReceiptImage { get; set; }
     }
 }
 

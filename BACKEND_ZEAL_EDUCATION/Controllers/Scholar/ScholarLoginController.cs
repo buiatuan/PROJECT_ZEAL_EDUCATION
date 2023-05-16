@@ -16,15 +16,22 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
         }
 
         [HttpGet]
-        public IActionResult MatchAccount([FromBody] string username,[FromBody] string password)
+        public IActionResult MatchAccount(string username,string password)
         {
-            var account = _dbContext.Accounts.Where(m
-                    => (m.Username == username && username!=null)
-                    && (m.Password == password && password!=null)
+            if(username == null || password == null)
+            {
+                return NotFound("NULL VALUE");
+            }
+            else
+            {
+                var account = _dbContext.Accounts.Where(m
+                    => (m.Username == username)
+                    && (m.Password == password)
                     );
-            if (account == null)
-                return NotFound("Please try again your username or your password one more time!");
-            return Ok("The username and password have been matched!");
+                if (account == null)
+                    return NotFound("Please try again your username or your password one more time!");
+                return Ok("The username and password have been matched!");
+            }
         }
     }
 }
