@@ -17,7 +17,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
         }
 
         [HttpGet("{id:int}")]
-        public IActionResult GetDeail([FromRoute] int id)
+        public IActionResult GetDetail([FromRoute] int id)
         {
             var scholar = _dbContext.Scholars.Find(id);
             if (scholar == null) return NotFound(Message.NOT_FOUND_SCHOLAR);

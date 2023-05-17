@@ -22,7 +22,7 @@ public class AuthController : BaseController<AuthController>
         var data = _dbContext.Accounts.FirstOrDefault(m => m.Username == model.Username);
         if (data == null) return BadRequest("Username/password incorrect");
 
-        var isValid = model.Username.ValidPassword(data.Salt, model.Password, data.Password);
+        var isValid = model.Username.ValidPassword(data.Salt!, model.Password, data.Password);
         if (!isValid) return BadRequest("Username/password incorrect");
 
         var accessToken = GenerateToken(model.Username);

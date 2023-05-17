@@ -17,10 +17,12 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         {
         }
 
-        [HttpGet]
-        public IActionResult GetListFaculty()
+        [HttpGet("{status:int}")]
+        public IActionResult GetListFaculty(int? status = 1)
         {
-            var result = _dbContext.Faculties;
+            var result = _dbContext.Faculties.Where(m => m.Status == status);
+            if (result == null)
+                return NotFound(Message.NOT_FOUND_FACUTLY);
             return Ok(result);
         }
 

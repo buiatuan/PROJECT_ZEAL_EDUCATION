@@ -21,10 +21,12 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         {
         }
 
-        [HttpGet]
-        public IActionResult GetListCourse()
+        [HttpGet("{status:int}")]
+        public IActionResult GetListCourse(int? status = 1)
         {
-            var courseList = _dbContext.Courses;
+            var courseList = _dbContext.Courses.Where(m => m.Status == status);
+            if (courseList == null)
+                return NotFound(Message.NOT_FOUND_COURSE);
             return Ok(courseList);
         }
 
@@ -73,7 +75,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult Edit([FromRoute] int id, [FromBody] CourseCreateModel model)
+        public IActionResult Edit(int id, CourseCreateModel model)
         {
             var course = _dbContext.Courses.Find(id);
             if (course == null) return NotFound(Message.NOT_FOUND_COURSE);
@@ -105,37 +107,15 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         //0 - refused
         //2 - pending
         //1 - accepted
-        [HttpGet("Pending")]
-        public IActionResult GetPending()
+        [HttpGet("{status:int}")]
+        public IActionResult GetStatus(int? status = 1)
         {
-            var pending_request = _dbContext.ScholarCourses.Where(m => m.Status == 2);
-            if (pending_request == null)
+            var request = _dbContext.ScholarCourses.Where(m => m.Status == status);
+            if (request == null)
             {
                 return NotFound(Message.NOT_FOUND_DATA);
             }
-            return Ok(pending_request);
-        }
-
-        [HttpGet("Accepted")]
-        public IActionResult GetAccepted()
-        {
-            var completed_request = _dbContext.ScholarCourses.Where(m => m.Status == 1);
-            if (completed_request == null)
-            {
-                return NotFound(Message.NOT_FOUND_DATA);
-            }
-            return Ok(completed_request);
-        }
-
-        [HttpGet("Refused")]
-        public IActionResult GetRefused()
-        {
-            var refused_request = _dbContext.ScholarCourses.Where(m => m.Status == 0);
-            if (refused_request == null)
-            {
-                return NotFound(Message.NOT_FOUND_DATA);
-            }
-            return Ok(refused_request);
+            return Ok(request);
         }
 
         [HttpPut("Confirmed")]
