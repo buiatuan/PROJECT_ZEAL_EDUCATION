@@ -4,6 +4,7 @@ using Common;
 using Microsoft.AspNetCore.Mvc;
 using Models.Entities;
 using Models.Models.Response.CourseResponse;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
 {
@@ -19,7 +20,11 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
         [HttpGet]
         public IActionResult GetListCourse()
         {
-            var courseList = _dbContext.Courses;
+            var courseList = _dbContext.Courses.Where(m => m.Status == 1);
+            if (courseList == null)
+            {
+                return NotFound(Message.NOT_FOUND_DATA);
+            }
             return Ok(courseList);
         }
 
@@ -32,7 +37,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
                                 join scholar in _dbContext.Scholars on sc.ScholarId equals scholar.Id
                                 where sc.CourseId == id
                                 select scholar;
-            var result = new CourseDetailViewModel
+            var result = new ScholarCourseDetailModel
             {
                 Name = course.Name ?? null,
                 CourseCode = course.CourseCode ?? null,
@@ -40,9 +45,12 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
                 CourseType = course.CourseType ?? null,
                 Descreption = course.Descreption ?? "",
                 Image = course.Image ?? "",
+                Quantity = courseScholar.Count()
             };
             return Ok(result);
         }
+
+
     }
 }
 

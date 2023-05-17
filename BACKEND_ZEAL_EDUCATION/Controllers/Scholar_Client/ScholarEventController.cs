@@ -2,6 +2,7 @@
 using Common;
 using Microsoft.AspNetCore.Mvc;
 using Models.Entities;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
 {

@@ -3,13 +3,11 @@ namespace Models.Models.Response.CourseRegisterResponse
 {
 	public class ConfirmedRegisterCourse
 	{
+        public int Id { get; set; }
+
+        public int? Status { get; set; }
+
         public decimal? Purchased { get; set; }
-
-        public decimal? TuitionFees { get; set; }
-
-        public int? ScholarId { get; set; }
-
-        public int? CourseId { get; set; }
     }
 }
 

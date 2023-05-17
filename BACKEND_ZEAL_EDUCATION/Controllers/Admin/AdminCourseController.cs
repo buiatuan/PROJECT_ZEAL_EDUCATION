@@ -7,6 +7,8 @@ using Scholar_model = Models.Entities.Scholar;
 using Models.Models.Request.CourseRequest;
 using Models.Models.Response.CourseResponse;
 using static System.Net.Mime.MediaTypeNames;
+using Models.Models.Response.CourseRegisterResponse;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
 {
@@ -97,6 +99,56 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             _dbContext.Courses.Update(course);
             var eff = _dbContext.SaveChanges();
             return eff > 0 ?  Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
+        }
+
+
+        //0 - refused
+        //2 - pending
+        //1 - accepted
+        [HttpGet("Pending")]
+        public IActionResult GetPending()
+        {
+            var pending_request = _dbContext.ScholarCourses.Where(m => m.Status == 2);
+            if (pending_request == null)
+            {
+                return NotFound(Message.NOT_FOUND_DATA);
+            }
+            return Ok(pending_request);
+        }
+
+        [HttpGet("Accepted")]
+        public IActionResult GetAccepted()
+        {
+            var completed_request = _dbContext.ScholarCourses.Where(m => m.Status == 1);
+            if (completed_request == null)
+            {
+                return NotFound(Message.NOT_FOUND_DATA);
+            }
+            return Ok(completed_request);
+        }
+
+        [HttpGet("Refused")]
+        public IActionResult GetRefused()
+        {
+            var refused_request = _dbContext.ScholarCourses.Where(m => m.Status == 0);
+            if (refused_request == null)
+            {
+                return NotFound(Message.NOT_FOUND_DATA);
+            }
+            return Ok(refused_request);
+        }
+
+        [HttpPut("Confirmed")]
+        public IActionResult ConfirmedCreate(ConfirmedRegisterCourse model)
+        {
+            var data = _dbContext.ScholarCourses.Where(m => m.Id == model.Id).First();
+            if (data == null)
+            {
+                return NotFound(Message.NOT_FOUND_DATA);
+            }
+            _dbContext.ScholarCourses.Update(data);
+            var eff = _dbContext.SaveChanges();
+            return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
         }
     }
 }

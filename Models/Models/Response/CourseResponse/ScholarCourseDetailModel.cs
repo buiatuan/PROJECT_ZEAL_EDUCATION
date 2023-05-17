@@ -9,6 +9,7 @@ namespace Models.Models.Response.CourseResponse
         public string? CourseType { get; set; }
         public string? Descreption { get; set; }
         public string? Image { get; set; }
+        public int? Quantity { get; set; }
     }
 }
 
