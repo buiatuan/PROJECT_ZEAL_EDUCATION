@@ -45,7 +45,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
                 CreatedDate = course.CreatedDate ?? null,
                 UpdatedDate = course.UpdatedDate ?? null,
                 Image = course.Image ?? "",
-                Scholars = courseScholar.ToList() ?? new List<Scholar>(),
+                Scholars = courseScholar.ToList(),
             };
             return Ok(result);
         }
