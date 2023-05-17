@@ -6,8 +6,6 @@ namespace Models.Models.Response.CourseRegisterResponse
         public int Id { get; set; }
 
         public int? Status { get; set; }
-
-        public decimal? Purchased { get; set; }
     }
 }
 

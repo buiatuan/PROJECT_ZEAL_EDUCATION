@@ -146,6 +146,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             {
                 return NotFound(Message.NOT_FOUND_DATA);
             }
+            data.Status = 1;
             _dbContext.ScholarCourses.Update(data);
             var eff = _dbContext.SaveChanges();
             return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
