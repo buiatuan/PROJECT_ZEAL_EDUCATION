@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Entities;
+using Scholar_model = Models.Entities.Scholar;
 using Models.Models.Request;
 using Models.Models.Response.FacultyResponse;
 
@@ -29,7 +30,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             var data = _dbContext.Faculties.Find(id);
             if (data == null) return NotFound(Message.NOT_FOUND_FACUTLY);
             var scholarList = _dbContext.Scholars.Where(m => m.FacultyId == id)
-                .Select(m => new Scholar
+                .Select(m => new Scholar_model
                 {
                     Id= m.Id,
                     ScholarCode= m.ScholarCode,
