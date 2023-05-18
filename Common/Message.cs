@@ -16,6 +16,7 @@ namespace Common
         public static string NOT_FOUND_FACUTLY = "Not found facutly";
         public static string NOT_FOUND_DATA = "Not found data";
         public static string NOT_FOUND_EXAM = "Not found exam";
+        public static string NOT_FOUND_ACCOUNT = "Not found account";
         public static string USERNAME_MATCHING = "The username account has existed!";
     }
 }
