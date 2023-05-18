@@ -29,7 +29,7 @@ public class BaseController<T> : ControllerBase
     protected string GenerateToken(string username)
     {
         var secretKey = _config.GetValue<string>("Authen:Secret");
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!));
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
         var claims = new[]
@@ -39,7 +39,7 @@ public class BaseController<T> : ControllerBase
 
         var token = new JwtSecurityToken(
             claims: claims,
-            expires: DateTime.Now.AddMinutes(1),
+            expires: DateTime.Now.AddMinutes(360),
             signingCredentials: credentials
         );
 

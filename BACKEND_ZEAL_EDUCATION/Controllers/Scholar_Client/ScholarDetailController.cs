@@ -19,12 +19,11 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
         [HttpGet("{AccountId:int}")]
         public IActionResult GetDetail([FromRoute] int id)
         {
-            var account = _dbContext.Accounts.Find(id);
-            if (account == null) return NotFound(Message.NOT_FOUND_ACCOUNT);
-            var scholarArray = _dbContext.Scholars.Where(m => m.Id == account.Id);
-            if (scholarArray == null)
+            var scholarId = _dbContext.Scholars.FirstOrDefault(m => m.AccountId == id);
+            if (scholarId == null)
                 return NotFound(Message.NOT_FOUND_SCHOLAR);
-            var scholar = scholarArray.FirstOrDefault()!;
+            var scholar = _dbContext.Scholars.Find(scholarId.Id);
+            if (scholar == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
             var scholarAccount = _dbContext.Accounts.Find(scholar.AccountId);
             if (scholarAccount == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
             var scholarCourses = from sc in _dbContext.ScholarCourses
