@@ -14,10 +14,12 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         {
         }
 
-        [HttpGet]
-        public IActionResult GetListEvent()
+        [HttpGet("{status:int}")]
+        public IActionResult GetListEvent(int? status = 1)
         {
-            var result = _dbContext.Events;
+            var result = _dbContext.Events.Where(m => m.Status == status);
+            if (result == null)
+                return NotFound(Message.NOT_FOUND_EVENT);
             return Ok(result);
         }
 
@@ -62,12 +64,12 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpPut("{id:int}")]
         public IActionResult Delete([FromRoute] int id)
         {
             var data = _dbContext.Events.Find(id);
             if (data == null) return NotFound(Message.NOT_FOUND_EVENT);
-            _dbContext.Events.Remove(data);
+            data.Status = 0;
             var eff = _dbContext.SaveChanges();
             return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
         }

@@ -22,10 +22,10 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         }
 
         // GET: AdminExam
-        [HttpGet]
-        public async Task<IActionResult> GetList()
+        [HttpGet("{status:int}")]
+        public async Task<IActionResult> GetList(int? status = 1)
         {
-            var result = _dbContext.Exams.Select(m =>
+            var result = _dbContext.Exams.Where(m => m.Course!.Status == status).Select(m =>
                 new ExamBaseViewable
                 {
                     Id = m.Id,
@@ -37,10 +37,12 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
                     UpdatedDate = m.UpdatedDate,
                     UpdatedBy = m.UpdatedBy,
                 });
+            if (result == null)
+                return NotFound(Message.NOT_FOUND_EXAM);
             return Ok(await result.ToListAsync());
         }
 
-        // GET: AdminExam/Details/5
+        // GET: AdminExam/Details
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Details(int? id)
         {
@@ -64,10 +66,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
                     Course = m.Course
                 }).FirstOrDefaultAsync(m => m.Id == id);
             if (exam == null)
-            {
                 return NotFound();
-            }
-
             return Ok(exam);
         }
 
@@ -82,7 +81,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
                 EndDate = model.EndDate,
                 CourseId = model.CourseId,
                 Descreption = model.Descreption,
-                CreatedDate = DateTime.Now,
+                CreatedDate = DateTime.UtcNow,
                 CreatedBy = "Admin"
             };
             _dbContext.Exams.Add(data);
@@ -90,9 +89,9 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             return eff > 0 ? Ok("Success") : BadRequest("Failed");
         }
 
-        // GET: AdminExam/Edit/5
+        // GET: AdminExam/Edit
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Edit([FromRoute] int id, [FromBody] ExamBaseModel exam_model)
+        public async Task<IActionResult> Edit([FromRoute] int? id, ExamBaseModel exam_model)
         {
             if (id == null || _dbContext.Exams == null)
             {
@@ -117,19 +116,19 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
         }
 
-        // GET: AdminExam/Delete/5
+        // GET: AdminExam/Delete
         [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete([FromRoute]int id)
+        public async Task<IActionResult> Delete([FromRoute]int? id)
         {
-            if (id == null || _dbContext.Exams == null)
-            {
-                return NotFound();
-            }
-
             var exam = await _dbContext.Exams.FindAsync(id);
             if (exam == null)
             {
                 return NotFound();
+            }
+            else
+            {
+                exam.Course!.Status = 0;
+                await _dbContext.SaveChangesAsync();
             }
             return Ok(Message.SUCCESS);
         }

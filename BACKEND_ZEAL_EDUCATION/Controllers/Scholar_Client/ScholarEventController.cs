@@ -18,7 +18,8 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
         [HttpGet]
         public IActionResult GetListEvent()
         {
-            var result = _dbContext.Events;
+            var result = _dbContext.Events.Where(m => m.Status == 1);
+            if (result == null) return NotFound("No event matching!");
             return Ok(result);
         }
 

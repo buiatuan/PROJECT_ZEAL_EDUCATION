@@ -17,10 +17,10 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         {
         }
 
-        [HttpGet]
-        public IActionResult GetListScholar()
+        [HttpGet("{status:int}")]
+        public IActionResult GetListScholar(int? status = 1)
         {
-            var result = _dbContext.Scholars.Select(m =>
+            var result = _dbContext.Scholars.Where(m => m.Account!.Status == status).Select(m =>
                 new ScholarBaseViewable
                 {
                     Id = m.Id,
@@ -37,7 +37,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         }
 
         [HttpGet("{id:int}")]
-        public IActionResult GetDeail([FromRoute]int id)
+        public IActionResult GetDetail([FromRoute]int id)
         {
             var scholar = _dbContext.Scholars.Find(id);
             if (scholar == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
@@ -91,7 +91,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult EditScholar([FromRoute] int id,[FromBody] ScholarBaseModel scholarBase)
+        public IActionResult EditScholar(int id,ScholarBaseModel scholarBase)
         {
             var scholar = _dbContext.Scholars.Find(id);
             if (scholar == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
@@ -110,7 +110,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpPut("{id:int}")]
         public IActionResult Delete([FromRoute] int id)
         {
             var scholar = _dbContext.Scholars.Find(id);
@@ -118,8 +118,10 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             var scholarAccount = _dbContext.Accounts.Find(scholar.AccountId);
             if (scholarAccount == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
 
-            _dbContext.Scholars.Remove(scholar);
-            _dbContext.Accounts.Remove(scholarAccount);
+            scholarAccount.Status = 0;
+            _dbContext.SaveChanges();
+            //_dbContext.Scholars.Remove(scholar);
+            //_dbContext.Accounts.Remove(scholarAccount);
             var eff = _dbContext.SaveChanges();
             return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Common;
+using Microsoft.AspNetCore.Mvc;
 using Models.Entities;
 using System.Data;
 
@@ -14,7 +15,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         }
 
         [HttpGet]
-        public IActionResult GetList()
+        public IActionResult GetAllRoleList()
         {
             var res = _dbContext.Roles.Select(m
                 => new Role
@@ -26,5 +27,14 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             return Ok(res);
         }
 
+        //1-admin,2-teacher,3-scholar
+        [HttpGet("{roleid:int}")]
+        public IActionResult GetEachRoleList(int? roleid)
+        {
+            var data = _dbContext.Accounts.Where(m => m.RoleId == roleid);
+            if (data == null)
+                return NotFound(Message.NOT_FOUND_DATA);
+            return Ok(data);
+        }
     }
 }
