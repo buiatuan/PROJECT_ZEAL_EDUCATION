@@ -16,19 +16,17 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
         {
         }
 
-        [HttpGet("{AccountId:int}")]
-        public IActionResult GetDetail([FromRoute] int id)
+        [HttpGet]
+        public IActionResult GetDeailScholarLogin()
         {
-            var scholarId = _dbContext.Scholars.FirstOrDefault(m => m.AccountId == id);
-            if (scholarId == null)
-                return NotFound(Message.NOT_FOUND_SCHOLAR);
-            var scholar = _dbContext.Scholars.Find(scholarId.Id);
-            if (scholar == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
-            var scholarAccount = _dbContext.Accounts.Find(scholar.AccountId);
+            var username = getCurrentUsernameLogin();
+            var scholarAccount = _dbContext.Accounts.FirstOrDefault(m => m.Username== username);
             if (scholarAccount == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
+            var scholar = _dbContext.Scholars.FirstOrDefault(m => m.AccountId == scholarAccount.Id);
+            if (scholar == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
             var scholarCourses = from sc in _dbContext.ScholarCourses
                                  join cs in _dbContext.Courses on sc.CourseId equals cs.Id
-                                 where sc.ScholarId == id
+                                 where sc.ScholarId == scholar.Id
                                  select new ScholarCourseViewable
                                  {
                                      Id = cs.Id,
@@ -43,7 +41,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
                                  };
             var scholarExam = from se in _dbContext.ScholarExams
                               join ex in _dbContext.Exams on se.ExamId equals ex.Id
-                              where se.ScholarId == id
+                              where se.ScholarId == scholar.Id
                               select new ScholarExamViewable
                               {
                                   Id = ex.Id,

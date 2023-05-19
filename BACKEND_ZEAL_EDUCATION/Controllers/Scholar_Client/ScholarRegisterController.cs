@@ -31,8 +31,8 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         //1 - active, 0 - unactive, 2 - locked
 
         [AllowAnonymous]
-        [HttpPost("CreateAccount")]
-        public IActionResult CreateAccount([FromBody] ScholarRegisterModel model)
+        [HttpPost]
+        public IActionResult Create([FromBody] ScholarRegisterModel model)
         {
             var checkUsername = _dbContext.Accounts.FirstOrDefault(m => m.Username == model.Username);
             if(checkUsername != null)
@@ -72,7 +72,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             return eff > 0 ? Ok("Success") : BadRequest("Failed");
         }
 
-        [HttpPost("CourseRegister")]
+        [HttpPost]
         public IActionResult CourseRegister([FromBody] ScholarCourseCode model)
         {
             var course = _dbContext.Courses.Where(m => m.Id == model.courseId).FirstOrDefault();
