@@ -11,7 +11,7 @@ using Models.Entities;
 namespace BACKEND_ZEAL_EDUCATION.Controllers;
 
 [Route("api/[controller]/[action]")]
-//[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 [ApiController]
 public class BaseController<T> : ControllerBase
 {
