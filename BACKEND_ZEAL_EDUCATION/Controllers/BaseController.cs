@@ -45,4 +45,10 @@ public class BaseController<T> : ControllerBase
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
+
+    protected string getCurrentUsernameLogin()
+    {
+        string? userName = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        return userName ?? "";
+    }
 }

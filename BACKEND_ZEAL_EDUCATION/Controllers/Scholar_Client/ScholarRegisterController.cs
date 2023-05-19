@@ -34,7 +34,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         [HttpPost]
         public IActionResult Create([FromBody] ScholarRegisterModel model)
         {
-            var checkUsername = _dbContext.Accounts.Where(m => m.Username == model.Username).First();
+            var checkUsername = _dbContext.Accounts.FirstOrDefault(m => m.Username == model.Username);
             if(checkUsername != null)
             {
                 return BadRequest(Message.USERNAME_MATCHING);
