@@ -85,7 +85,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             {
                 var data = new ScholarCourse
                 {
-                    Status = 2,
+                    Status = 1,
                     TuitionFees = course?.TuitionFees,
                     CourseId = course?.Id,
                     ScholarId = scholar?.Id,

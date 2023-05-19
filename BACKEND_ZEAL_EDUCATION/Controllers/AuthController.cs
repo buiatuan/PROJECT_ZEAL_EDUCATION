@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models.Entities;
 using Models.Models.Request;
+using Models.Models.Response;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers;
 
@@ -26,6 +27,11 @@ public class AuthController : BaseController<AuthController>
         if (!isValid) return BadRequest("Username/password incorrect");
 
         var accessToken = GenerateToken(model.Username);
-        return Ok(accessToken);
+        var response = new AccountLoginRespons
+        {
+            AccessToken = accessToken,
+            RoleId = data.RoleId,
+        };
+        return Ok(response);
     }
 }
