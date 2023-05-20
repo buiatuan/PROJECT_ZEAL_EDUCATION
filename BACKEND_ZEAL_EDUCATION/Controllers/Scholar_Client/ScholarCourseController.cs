@@ -1,6 +1,7 @@
 ﻿using System;
 using BACKEND_ZEAL_EDUCATION.Controllers.Admin;
 using Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models.Entities;
 using Models.Models.Response.CourseResponse;
@@ -18,6 +19,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetListCourse()
         {
             var courseList = _dbContext.Courses.Where(m => m.Status == 1);

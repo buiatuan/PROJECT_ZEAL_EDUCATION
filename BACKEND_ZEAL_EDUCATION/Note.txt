@@ -1,3 +1,3 @@
 ﻿1. Install-Package Microsoft.EntityFrameworkCore.Tools
 2. Install-Package Microsoft.EntityFrameworkCore.SqlServer
-3. Scaffold-DbContext "Data Source=DESKTOP-86M55DA\SQLEXPRESS;Initial Catalog=PROJECT_SEM_3;Integrated Security=True;TrustServerCertificate=Yes" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities -f
+3. Scaffold-DbContext "Data Source=.;Initial Catalog=PROJECT_SEM_3;Integrated Security=True;TrustServerCertificate=Yes" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities -f
