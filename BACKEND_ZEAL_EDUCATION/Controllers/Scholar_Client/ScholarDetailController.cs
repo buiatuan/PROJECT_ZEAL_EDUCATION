@@ -5,7 +5,7 @@ using Models.Entities;
 using Models.Models.Response.ScholarRequest;
 using Models.Models.Response.ScholarResponse;
 
-namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
+namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar_Client
 {
 	public class ScholarDetailController : BaseController<ScholarDetailController>
     {

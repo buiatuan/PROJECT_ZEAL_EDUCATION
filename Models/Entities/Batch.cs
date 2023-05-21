@@ -15,8 +15,6 @@ public partial class Batch
 
     public string? BatchCode { get; set; }
 
-    public int? FacultyId { get; set; }
-
     public DateTime? CreatedDate { get; set; }
 
     public string? CreatedBy { get; set; }

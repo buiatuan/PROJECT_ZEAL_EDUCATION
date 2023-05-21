@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models.Entities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
+namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar_Client
 {
     public class ScholarEventController : BaseController<ScholarEventController>
     {
@@ -16,6 +16,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
         {
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetListEvent()
         {
@@ -24,6 +25,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id:int}")]
         public IActionResult GetDetail(int id)
         {
