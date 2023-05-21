@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using Models.Models.Response.ExamResponse;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
 {
+    [AllowAnonymous]
     public class AdminExamController : BaseController<AdminExamController>
     {
         public AdminExamController(ProjectSem3Context dbContext,
@@ -23,6 +25,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
 
         // GET: AdminExam
         [HttpGet]
+       
         public async Task<IActionResult> GetList()
         {
             var result = _dbContext.Exams.Select(m =>

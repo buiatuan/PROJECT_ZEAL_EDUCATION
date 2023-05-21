@@ -1,4 +1,5 @@
 ﻿using Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models.Entities;
@@ -8,6 +9,7 @@ using Models.Models.Response.ScholarResponse;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
 {
+    [AllowAnonymous]
     public class AdminScholarController : BaseController<AdminScholarController>
     {
         public AdminScholarController(ProjectSem3Context dbContext,

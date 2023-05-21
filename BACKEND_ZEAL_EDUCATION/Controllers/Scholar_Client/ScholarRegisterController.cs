@@ -13,6 +13,7 @@ using Models.Models.Request.RegisterRequest;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
 {
+    [AllowAnonymous]
     public class ScholarRegisterController : BaseController<ScholarRegisterController>
     {
         public ScholarRegisterController(ProjectSem3Context dbContext,

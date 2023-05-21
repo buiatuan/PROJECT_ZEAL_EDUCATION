@@ -9,9 +9,11 @@ using Models.Models.Response.CourseResponse;
 using static System.Net.Mime.MediaTypeNames;
 using Models.Models.Response.CourseRegisterResponse;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
 {
+    [AllowAnonymous]
     public class AdminCourseController : BaseController<AdminCourseController>
     {
         public AdminCourseController(ProjectSem3Context dbContext,
@@ -22,6 +24,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         }
 
         [HttpGet]
+    
         public IActionResult GetListCourse()
         {
             var courseList = _dbContext.Courses;

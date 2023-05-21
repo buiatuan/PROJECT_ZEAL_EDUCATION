@@ -39,7 +39,7 @@ public class BaseController<T> : ControllerBase
 
         var token = new JwtSecurityToken(
             claims: claims,
-            expires: DateTime.Now.AddMinutes(1),
+            expires: DateTime.Now.AddMinutes(360),
             signingCredentials: credentials
         );
 

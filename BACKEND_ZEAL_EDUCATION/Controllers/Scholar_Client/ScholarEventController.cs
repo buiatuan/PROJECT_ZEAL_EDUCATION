@@ -1,13 +1,16 @@
 ﻿using System;
 using Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models.Entities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
 {
+    [AllowAnonymous]
     public class ScholarEventController : BaseController<ScholarEventController>
     {
+        
         public ScholarEventController(ProjectSem3Context dbContext,
             ILogger<ScholarEventController> logger,
             IConfiguration config)

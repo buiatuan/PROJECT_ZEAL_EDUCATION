@@ -9,7 +9,8 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
 {
-	public class ScholarCourseController : BaseController<ScholarCourseController>
+    [AllowAnonymous]
+    public class ScholarCourseController : BaseController<ScholarCourseController>
     {
         public ScholarCourseController(ProjectSem3Context dbContext,
             ILogger<ScholarCourseController> logger,
@@ -31,6 +32,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
         }
 
         [HttpGet("{id:int}")]
+        [AllowAnonymous]
         public IActionResult GetDetail(int id)
         {
             var course = _dbContext.Courses.Find(id);
