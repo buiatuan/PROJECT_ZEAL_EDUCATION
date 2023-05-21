@@ -17,10 +17,10 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         {
         }
 
-        [HttpGet("{status:int}")]
-        public IActionResult GetListFaculty(int? status = 1)
+        [HttpGet]
+        public IActionResult GetListFaculty([FromQuery] int? status = null)
         {
-            var result = _dbContext.Faculties.Where(m => m.Status == status);
+            var result = _dbContext.Faculties.Where(m => (m.Status == status || status == null));
             if (result == null)
                 return NotFound(Message.NOT_FOUND_FACUTLY);
             return Ok(result);
@@ -89,6 +89,8 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             var data = _dbContext.Faculties.Find(id);
             if (data == null) return NotFound(Message.NOT_FOUND_FACUTLY);
             data.Status = 0;
+            data.UpdatedDate = DateTime.Now;
+            data.UpdatedBy = "Admin";
             _dbContext.Faculties.Update(data);
             var eff = _dbContext.SaveChanges();
             return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED) ;

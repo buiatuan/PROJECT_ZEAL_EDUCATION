@@ -1,12 +1,13 @@
 ﻿using System;
 using BACKEND_ZEAL_EDUCATION.Controllers.Admin;
 using Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models.Entities;
 using Models.Models.Response.CourseResponse;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
+namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar_Client
 {
 	public class ScholarCourseController : BaseController<ScholarCourseController>
     {
@@ -17,6 +18,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar
         {
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetListCourse()
         {

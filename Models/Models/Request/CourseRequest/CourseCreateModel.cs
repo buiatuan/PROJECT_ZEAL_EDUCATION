@@ -19,5 +19,6 @@ namespace Models.Models.Request.CourseRequest
         public string? CourseType { get; set; }
         public string? Descreption { get; set; }
         public string? Image { get; set; }
+        public int? Status { get; set; } = 1;
     }
 }

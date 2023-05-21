@@ -21,10 +21,10 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         {
         }
 
-        [HttpGet("{status:int}")]
-        public IActionResult GetListCourse(int? status = 1)
+        [HttpGet]
+        public IActionResult GetListCourse([FromQuery] int? status = null)
         {
-            var courseList = _dbContext.Courses.Where(m => m.Status == status);
+            var courseList = _dbContext.Courses.Where(m => (m.Status == status || status == null));
             if (courseList == null)
                 return NotFound(Message.NOT_FOUND_COURSE);
             return Ok(courseList);
@@ -58,6 +58,8 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         [HttpPost]
         public IActionResult Create([FromBody] CourseCreateModel model)
         {
+            var courseExist = _dbContext.Courses.FirstOrDefault(m => m.CourseCode == model.CourseCode);
+            if (courseExist != null) return BadRequest(Message.UCOURSE_CODE_ALREADY_EXIST);
             var data = new Course
             {
                 CourseCode = model.CourseCode,
@@ -66,6 +68,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
                 CreatedBy = "System",
                 CreatedDate = DateTime.Now,
                 TuitionFees = model.TuitionFees,
+                Status = 1,
                 Name = model.Name,
                 Image = model.Image,
             };
@@ -84,6 +87,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             course.CourseType = model.CourseType;
             course.Descreption = model.Descreption;
             course.TuitionFees = model.TuitionFees;
+            course.Status = model.Status;
             course.Image = model.Image;
             course.UpdatedBy = "System";
             course.UpdatedDate = DateTime.Now;
@@ -107,21 +111,11 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         //0 - refused
         //2 - pending
         //1 - accepted
-        [HttpGet("{status:int}")]
-        public IActionResult GetStatus(int? status = 1)
-        {
-            var request = _dbContext.ScholarCourses.Where(m => m.Status == status);
-            if (request == null)
-            {
-                return NotFound(Message.NOT_FOUND_DATA);
-            }
-            return Ok(request);
-        }
-
+      
         [HttpPut("Confirmed")]
         public IActionResult ConfirmedCreate(ConfirmedRegisterCourse model)
         {
-            var data = _dbContext.ScholarCourses.Where(m => m.Id == model.Id).First();
+            var data = _dbContext.ScholarCourses.FirstOrDefault(m => m.Id == model.Id);
             if (data == null)
             {
                 return NotFound(Message.NOT_FOUND_DATA);

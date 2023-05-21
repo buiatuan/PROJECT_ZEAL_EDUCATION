@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.Entities;
+using System;
 namespace Models.Models.Response.CourseResponse
 {
 	public class ScholarCourseDetailModel

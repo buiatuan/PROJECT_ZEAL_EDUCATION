@@ -22,10 +22,10 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         }
 
         // GET: AdminExam
-        [HttpGet("{status:int}")]
-        public async Task<IActionResult> GetList(int? status = 1)
+        [HttpGet]
+        public async Task<IActionResult> GetList()
         {
-            var result = _dbContext.Exams.Where(m => m.Course!.Status == status).Select(m =>
+            var result = _dbContext.Exams.Select(m =>
                 new ExamBaseViewable
                 {
                     Id = m.Id,
@@ -48,7 +48,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         {
             if (id == null || _dbContext.Exams == null)
             {
-                return NotFound();
+                return NotFound(Message.NOT_FOUND_EXAM);
             }
 
             var exam = await _dbContext.Exams
@@ -66,7 +66,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
                     Course = m.Course
                 }).FirstOrDefaultAsync(m => m.Id == id);
             if (exam == null)
-                return NotFound();
+                return NotFound(Message.NOT_FOUND_EXAM);
             return Ok(exam);
         }
 
@@ -123,11 +123,12 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             var exam = await _dbContext.Exams.FindAsync(id);
             if (exam == null)
             {
-                return NotFound();
+                return NotFound(Message.NOT_FOUND_EXAM);
             }
             else
             {
                 exam.Course!.Status = 0;
+                _dbContext.Exams.Update(exam);
                 await _dbContext.SaveChangesAsync();
             }
             return Ok(Message.SUCCESS);

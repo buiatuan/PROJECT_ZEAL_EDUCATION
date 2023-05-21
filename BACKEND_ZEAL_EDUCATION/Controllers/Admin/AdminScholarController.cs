@@ -17,29 +17,29 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         {
         }
 
-        [HttpGet("{status:int}")]
-        public IActionResult GetListScholar(int? status = 1)
+        [HttpGet]
+        public IActionResult GetListScholar([FromQuery] int? status = null)
         {
-            var result = _dbContext.Scholars.Where(m => m.Account!.Status == status).Select(m =>
-                new ScholarBaseViewable
-                {
-                    Id = m.Id,
-                    Name = m.Account != null ? m.Account.Name : "",
-                    Age = m.Account != null ? m.Account.Age : null,
-                    Gender = m.Account != null ? m.Account.Gender : "",
-                    Address = m.Account != null ? m.Account.Address : "",
-                    Status = m.Account != null ? m.Account.Status : null,
-                    Descreption = m.Account != null ? m.Account.Descreption : "",
-                    Batch = m.Batch,
-                    Faculty = m.Faculty,
-                });
+            var result = _dbContext.Scholars.Where(m => (m.Account!.Status == status || status == null))
+                .Select(m => new ScholarBaseViewable
+                        {
+                            Id = m.Id,
+                            Name = m.Account != null ? m.Account.Name : "",
+                            Age = m.Account != null ? m.Account.Age : null,
+                            Gender = m.Account != null ? m.Account.Gender : "",
+                            Address = m.Account != null ? m.Account.Address : "",
+                            Status = m.Account != null ? m.Account.Status : null,
+                            Descreption = m.Account != null ? m.Account.Descreption : "",
+                            Batch = m.Batch,
+                            Faculty = m.Faculty,
+                        });
             return Ok(result);
         }
 
         [HttpGet("{id:int}")]
-        public IActionResult GetDetail([FromRoute]int id)
+        public async Task<IActionResult> GetDetail([FromRoute]int id)
         {
-            var scholar = _dbContext.Scholars.Find(id);
+            var scholar = await _dbContext.Scholars.FindAsync(id);
             if (scholar == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
             var scholarAccount = _dbContext.Accounts.Find(scholar.AccountId);
             if (scholarAccount == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
@@ -91,7 +91,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult EditScholar(int id,ScholarBaseModel scholarBase)
+        public IActionResult EditScholar([FromRoute] int id,[FromBody] ScholarBaseModel scholarBase)
         {
             var scholar = _dbContext.Scholars.Find(id);
             if (scholar == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
@@ -110,7 +110,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
         }
 
-        [HttpPut("{id:int}")]
+        [HttpDelete("{id:int}")]
         public IActionResult Delete([FromRoute] int id)
         {
             var scholar = _dbContext.Scholars.Find(id);
@@ -119,9 +119,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             if (scholarAccount == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
 
             scholarAccount.Status = 0;
-            _dbContext.SaveChanges();
-            //_dbContext.Scholars.Remove(scholar);
-            //_dbContext.Accounts.Remove(scholarAccount);
+            _dbContext.Accounts.Update(scholarAccount);
             var eff = _dbContext.SaveChanges();
             return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
         }

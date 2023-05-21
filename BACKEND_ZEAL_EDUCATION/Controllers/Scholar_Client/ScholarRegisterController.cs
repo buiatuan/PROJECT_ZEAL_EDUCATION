@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using Common;
 using Scholar_model = Models.Entities.Scholar;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Models.Entities;
 using Models.Models.Request.RegisterRequest;
 
-namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
+namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar_Client
 {
     public class ScholarRegisterController : BaseController<ScholarRegisterController>
     {
@@ -40,7 +35,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
                 return BadRequest(Message.USERNAME_MATCHING);
             }
             var salt = Guid.NewGuid().ToString();
-            var passHash = Common.Ultils.ComputeSha256Hash(model.Username, salt, model.Password);
+            var passHash = Ultils.ComputeSha256Hash(model.Username, salt, model.Password);
             var data = new Account
             {
                 Username = model.Username,

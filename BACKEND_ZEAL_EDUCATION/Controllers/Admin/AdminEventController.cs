@@ -14,10 +14,10 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         {
         }
 
-        [HttpGet("{status:int}")]
-        public IActionResult GetListEvent(int? status = 1)
+        [HttpGet]
+        public IActionResult GetListEvent([FromQuery] int? status = null)
         {
-            var result = _dbContext.Events.Where(m => m.Status == status);
+            var result = _dbContext.Events.Where(m => (m.Status == status || status == null));
             if (result == null)
                 return NotFound(Message.NOT_FOUND_EVENT);
             return Ok(result);
@@ -70,6 +70,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             var data = _dbContext.Events.Find(id);
             if (data == null) return NotFound(Message.NOT_FOUND_EVENT);
             data.Status = 0;
+            _dbContext.Events.Update(data);
             var eff = _dbContext.SaveChanges();
             return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
         }
