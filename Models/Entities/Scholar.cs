@@ -21,6 +21,8 @@ public partial class Scholar
 
     public virtual Faculty? Faculty { get; set; }
 
+    public virtual ICollection<FeedBack> FeedBacks { get; set; } = new List<FeedBack>();
+
     public virtual ICollection<ReportScholar> ReportScholars { get; set; } = new List<ReportScholar>();
 
     public virtual ICollection<ScholarCourse> ScholarCourses { get; set; } = new List<ScholarCourse>();

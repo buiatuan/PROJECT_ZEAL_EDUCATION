@@ -31,5 +31,7 @@ public partial class Course
 
     public virtual ICollection<Exam> Exams { get; set; } = new List<Exam>();
 
+    public virtual ICollection<FeedBack> FeedBacks { get; set; } = new List<FeedBack>();
+
     public virtual ICollection<ScholarCourse> ScholarCourses { get; set; } = new List<ScholarCourse>();
 }

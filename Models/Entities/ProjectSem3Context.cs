@@ -27,6 +27,8 @@ public partial class ProjectSem3Context : DbContext
 
     public virtual DbSet<Faculty> Faculties { get; set; }
 
+    public virtual DbSet<FeedBack> FeedBacks { get; set; }
+
     public virtual DbSet<ReportScholar> ReportScholars { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
@@ -54,6 +56,9 @@ public partial class ProjectSem3Context : DbContext
                 .HasMaxLength(300)
                 .HasColumnName("address");
             entity.Property(e => e.Age).HasColumnName("age");
+            entity.Property(e => e.Avatar)
+                .HasMaxLength(150)
+                .HasColumnName("avatar");
             entity.Property(e => e.CreatedBy)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -197,6 +202,10 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.Description)
                 .HasColumnType("text")
                 .HasColumnName("description");
+            entity.Property(e => e.Image)
+                .HasMaxLength(150)
+                .IsFixedLength()
+                .HasColumnName("image");
             entity.Property(e => e.Location)
                 .HasMaxLength(200)
                 .HasColumnName("location");
@@ -282,6 +291,34 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.UpdatedDate)
                 .HasColumnType("datetime")
                 .HasColumnName("updatedDate");
+        });
+
+        modelBuilder.Entity<FeedBack>(entity =>
+        {
+            entity.ToTable("feedBack");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.CourseId).HasColumnName("courseId");
+            entity.Property(e => e.CreateBy).HasColumnName("createBy");
+            entity.Property(e => e.CreateDate)
+                .HasColumnType("datetime")
+                .HasColumnName("createDate");
+            entity.Property(e => e.Message)
+                .HasMaxLength(300)
+                .IsFixedLength()
+                .HasColumnName("message");
+            entity.Property(e => e.Title)
+                .HasMaxLength(150)
+                .IsFixedLength()
+                .HasColumnName("title");
+
+            entity.HasOne(d => d.Course).WithMany(p => p.FeedBacks)
+                .HasForeignKey(d => d.CourseId)
+                .HasConstraintName("FK_feedBack_course");
+
+            entity.HasOne(d => d.CreateByNavigation).WithMany(p => p.FeedBacks)
+                .HasForeignKey(d => d.CreateBy)
+                .HasConstraintName("FK_feedBack_scholar");
         });
 
         modelBuilder.Entity<ReportScholar>(entity =>
