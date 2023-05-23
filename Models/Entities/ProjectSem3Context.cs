@@ -188,9 +188,7 @@ public partial class ProjectSem3Context : DbContext
         {
             entity.ToTable("event");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedBy)
                 .HasMaxLength(50)
                 .IsUnicode(false)

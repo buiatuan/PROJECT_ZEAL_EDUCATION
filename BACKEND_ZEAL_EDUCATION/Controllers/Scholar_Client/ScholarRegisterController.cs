@@ -72,6 +72,9 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar_Client
         {
             var course = _dbContext.Courses.Where(m => m.Id == model.courseId).FirstOrDefault();
             var scholar = _dbContext.Scholars.Where(m => m.Id == model.scholarId).FirstOrDefault();
+            var courseRegister = _dbContext.ScholarCourses.FirstOrDefault(m =>
+                            m.ScholarId == model.scholarId && m.CourseId == model.courseId);
+            if (courseRegister != null) return BadRequest(Message.COURSE_HAS_REGISTER);
             if(course ==null || scholar == null)
             {
                 return NotFound(Message.NOT_FOUND_DATA);

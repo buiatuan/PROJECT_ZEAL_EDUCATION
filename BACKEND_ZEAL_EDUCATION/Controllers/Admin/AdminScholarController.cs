@@ -56,6 +56,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
                             Purchased = sc.TuitionFees,
                             AssignmetPoint = sc.AssignmetPoint,
                             Status = sc.Status,
+                            Image = cs.Image,
                             TestPoint = sc.TestPoint,
                         };
             var scholarExam = from se in _dbContext.ScholarExams

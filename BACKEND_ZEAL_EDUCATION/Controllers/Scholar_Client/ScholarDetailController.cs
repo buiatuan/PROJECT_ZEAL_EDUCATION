@@ -36,6 +36,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar_Client
                                      Descreption = cs.Descreption,
                                      Purchased = sc.TuitionFees,
                                      AssignmetPoint = sc.AssignmetPoint,
+                                     Image = cs.Image,
                                      Status = sc.Status,
                                      TestPoint = sc.TestPoint,
                                  };

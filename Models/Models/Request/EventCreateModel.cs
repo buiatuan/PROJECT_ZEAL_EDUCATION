@@ -11,7 +11,7 @@ namespace Models.Models.Request
         public DateTime? StartDate { get; set; }
         [Required]
         public string? Location { get; set; }
-        public int? Status { get; set; }
+        public int? Status { get; set; } = 1;
         public string? Description { get; set; }
     }
 }

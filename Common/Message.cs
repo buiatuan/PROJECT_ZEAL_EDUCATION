@@ -22,5 +22,6 @@ namespace Common
         public static string USERNAME_MATCHING = "The username account has existed!";
 
         public static string UCOURSE_CODE_ALREADY_EXIST = "Course code already exist";
+        public static string COURSE_HAS_REGISTER = "Course has register";
     }
 }

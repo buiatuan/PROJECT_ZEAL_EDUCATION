@@ -13,5 +13,6 @@ namespace Models.Models.Response.ScholarResponse
         public int? TestPoint { get; set; }
         public string? CourseType { get; set; }
         public string? Descreption { get; set; }
+        public string? Image { get; set; }
     }
 }
