@@ -2,6 +2,8 @@
 using Common;
 using Microsoft.AspNetCore.Mvc;
 using Models.Entities;
+using Models.Models.Request.RegisterRequest;
+using Models.Models.Request.ScholarRequest;
 using Models.Models.Response.ScholarRequest;
 using Models.Models.Response.ScholarResponse;
 
@@ -61,6 +63,8 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar_Client
                 Name = scholarAccount.Name,
                 Age = scholarAccount.Age,
                 Address = scholarAccount.Address,
+                Email = scholarAccount.Email,
+                PhoneNumber = scholarAccount.PhoneNumber,
                 Gender = scholarAccount.Gender,
                 Descreption = scholarAccount.Descreption,
                 DateOfbirth = scholarAccount.DateOfbirth,
@@ -70,6 +74,26 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar_Client
                 Exams = scholarExam.ToList(),
             };
             return Ok(scholarViewable);
+        }
+
+        [HttpPut]
+        public IActionResult EditMyScholar([FromBody] ScholarRegisterModel model)
+        {
+            var username = getCurrentUsernameLogin();
+            var scholarAccount = _dbContext.Accounts.FirstOrDefault(m => m.Username == username && m.RoleId == 3);
+            if (scholarAccount == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
+            scholarAccount.Address = model.Address;
+            scholarAccount.Gender = model.Gender;
+            scholarAccount.Name = model.Name;
+            scholarAccount.Age = model.Age;
+            scholarAccount.Email = model.Email;
+            scholarAccount.PhoneNumber = model.PhoneNumber;
+            scholarAccount.DateOfbirth = model.DateOfbirth;
+            scholarAccount.Descreption = model.Descreption;
+
+            _dbContext.Accounts.Update(scholarAccount);
+            var eff = _dbContext.SaveChanges();
+            return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
         }
     }
 }

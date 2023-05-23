@@ -56,9 +56,7 @@ public partial class ProjectSem3Context : DbContext
                 .HasMaxLength(300)
                 .HasColumnName("address");
             entity.Property(e => e.Age).HasColumnName("age");
-            entity.Property(e => e.Avatar)
-                .HasMaxLength(150)
-                .HasColumnName("avatar");
+            entity.Property(e => e.Avatar).HasColumnName("avatar");
             entity.Property(e => e.CreatedBy)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -72,6 +70,9 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.Descreption)
                 .HasMaxLength(300)
                 .HasColumnName("descreption");
+            entity.Property(e => e.Email)
+                .HasMaxLength(150)
+                .HasColumnName("email");
             entity.Property(e => e.Gender)
                 .HasMaxLength(1)
                 .IsUnicode(false)
@@ -82,6 +83,10 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.Password)
                 .HasMaxLength(255)
                 .HasColumnName("password");
+            entity.Property(e => e.PhoneNumber)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("phoneNumber");
             entity.Property(e => e.RoleId).HasColumnName("roleId");
             entity.Property(e => e.Salt)
                 .HasMaxLength(62)
@@ -161,13 +166,8 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.CreatedDate)
                 .HasColumnType("datetime")
                 .HasColumnName("createdDate");
-            entity.Property(e => e.Descreption)
-                .HasColumnType("text")
-                .HasColumnName("descreption");
-            entity.Property(e => e.Image)
-                .HasMaxLength(150)
-                .IsUnicode(false)
-                .HasColumnName("image");
+            entity.Property(e => e.Descreption).HasColumnName("descreption");
+            entity.Property(e => e.Image).HasColumnName("image");
             entity.Property(e => e.Name)
                 .HasMaxLength(150)
                 .HasColumnName("name");
@@ -199,10 +199,10 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.Description)
                 .HasColumnType("text")
                 .HasColumnName("description");
-            entity.Property(e => e.Image)
-                .HasMaxLength(150)
-                .IsFixedLength()
-                .HasColumnName("image");
+            entity.Property(e => e.EndTime)
+                .HasColumnType("datetime")
+                .HasColumnName("endTime");
+            entity.Property(e => e.Image).HasColumnName("image");
             entity.Property(e => e.Location)
                 .HasMaxLength(200)
                 .HasColumnName("location");
@@ -230,9 +230,7 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.CreatedDate)
                 .HasColumnType("datetime")
                 .HasColumnName("createdDate");
-            entity.Property(e => e.Descreption)
-                .HasColumnType("text")
-                .HasColumnName("descreption");
+            entity.Property(e => e.Descreption).HasColumnName("descreption");
             entity.Property(e => e.EndDate)
                 .HasColumnType("datetime")
                 .HasColumnName("endDate");
@@ -270,9 +268,7 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.CreatedDate)
                 .HasColumnType("datetime")
                 .HasColumnName("createdDate");
-            entity.Property(e => e.Descreption)
-                .HasMaxLength(200)
-                .HasColumnName("descreption");
+            entity.Property(e => e.Descreption).HasColumnName("descreption");
             entity.Property(e => e.FacultyCode)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -300,10 +296,7 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.CreateDate)
                 .HasColumnType("datetime")
                 .HasColumnName("createDate");
-            entity.Property(e => e.Message)
-                .HasMaxLength(300)
-                .IsFixedLength()
-                .HasColumnName("message");
+            entity.Property(e => e.Message).HasColumnName("message");
             entity.Property(e => e.Title)
                 .HasMaxLength(150)
                 .IsFixedLength()

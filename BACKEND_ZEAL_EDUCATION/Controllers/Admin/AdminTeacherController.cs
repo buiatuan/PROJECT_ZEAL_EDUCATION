@@ -38,6 +38,8 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
                 Salt    = salt,
                 Password = passHash,
                 Name = model.Name,
+                Email= model.Email,
+                PhoneNumber= model.PhoneNumber,
                 Age = model.Age,
                 Gender = model.Gender,
                 CreatedBy = "Admin",
@@ -70,6 +72,8 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             accoutLogin.Name = model.Name;
             accoutLogin.Age = model.Age;
             accoutLogin.Gender = model.Gender;
+            accoutLogin.Email = model.Email;
+            accoutLogin.PhoneNumber = model.PhoneNumber;
             accoutLogin.Avatar= model.Avatar;
             accoutLogin.DateOfbirth= model.DateOfbirth;
             accoutLogin.UpdatedDate = DateTime.Now;

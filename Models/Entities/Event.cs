@@ -22,4 +22,6 @@ public partial class Event
     public string? Description { get; set; }
 
     public string? Image { get; set; }
+
+    public DateTime? EndTime { get; set; }
 }

@@ -46,6 +46,9 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar_Client
                 Gender = model.Gender,
                 Address = model.Address,
                 Descreption = model.Descreption,
+                Email= model.Email,
+                PhoneNumber = model.PhoneNumber,
+                CreatedDate = DateTime.Now,
                 Status = 1,
                 RoleId = 3,
                 DateOfbirth = model.DateOfbirth
