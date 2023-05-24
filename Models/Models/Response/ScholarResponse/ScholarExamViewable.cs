@@ -15,5 +15,6 @@ namespace Models.Models.Response.ScholarResponse
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string? Descreption { get; set; }
+        public string? ExamName { get; set; }
     }
 }

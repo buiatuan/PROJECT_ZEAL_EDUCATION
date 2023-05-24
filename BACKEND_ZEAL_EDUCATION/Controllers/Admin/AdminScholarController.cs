@@ -71,6 +71,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
                               StartDate = ex.StartDate,
                               EndDate = ex.EndDate,
                               Point = se.Point,
+                              ExamName = ex.Course != null ? ex.Course.Name : "",
                               ExamCode = ex.ExamCode,
                               Descreption = ex.Descreption,
                           };
