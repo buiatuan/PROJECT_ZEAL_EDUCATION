@@ -43,6 +43,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
                 Age = model.Age,
                 Gender = model.Gender,
                 CreatedBy = "Admin",
+                Status = 1,
                 CreatedDate = DateTime.Now,
                 RoleId = 2,
             };
@@ -73,6 +74,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             accoutLogin.Age = model.Age;
             accoutLogin.Gender = model.Gender;
             accoutLogin.Email = model.Email;
+            accoutLogin.Status = model.Status;
             accoutLogin.PhoneNumber = model.PhoneNumber;
             accoutLogin.Avatar= model.Avatar;
             accoutLogin.DateOfbirth= model.DateOfbirth;

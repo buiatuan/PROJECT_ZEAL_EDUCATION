@@ -86,7 +86,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar_Client
             {
                 var data = new ScholarCourse
                 {
-                    Status = 1,
+                    Status = 3,
                     TuitionFees = course?.TuitionFees,
                     CourseId = course?.Id,
                     ScholarId = scholar?.Id,
@@ -96,6 +96,23 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar_Client
             }
             var eff = _dbContext.SaveChanges();
             return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
+        }
+
+        [HttpPut("{id:int}")]
+        public IActionResult CourseCancel([FromRoute] int id)
+        {
+            var username = getCurrentUsernameLogin();
+            var scholarAccount = _dbContext.Accounts.FirstOrDefault(m => m.Username == username && m.RoleId == 3);
+            if (scholarAccount == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
+            var scholar = _dbContext.Scholars.FirstOrDefault(m => m.AccountId == scholarAccount.Id);
+            if (scholar == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
+            var scholarCourse = _dbContext.ScholarCourses.FirstOrDefault(m => m.Id == id && m.ScholarId == scholar.Id);
+            if (scholarCourse == null) return NotFound(Message.NOT_FOUND_DATA);
+            if (scholarCourse.Status == 1) return Conflict(Message.COURSE_HAS_REGISTER);
+            _dbContext.ScholarCourses.Remove(scholarCourse);
+            var eff = _dbContext.SaveChanges();
+            return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
+
         }
     }
 }

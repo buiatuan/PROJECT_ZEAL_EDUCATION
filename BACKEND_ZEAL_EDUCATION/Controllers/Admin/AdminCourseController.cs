@@ -109,21 +109,22 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
 
 
         //0 - refused
-        //2 - pending
+        //3 - pending
         //1 - accepted
       
-        [HttpPut("Confirmed")]
-        public IActionResult ConfirmedCreate(ConfirmedRegisterCourse model)
+        [HttpPut]
+        public IActionResult ConfirmedOrRefusedCreate(ConfirmedRegisterCourse model)
         {
             var data = _dbContext.ScholarCourses.FirstOrDefault(m => m.Id == model.Id);
             if (data == null)
             {
                 return NotFound(Message.NOT_FOUND_DATA);
             }
-            data.Status = 1;
+            data.Status = model.Status;
             _dbContext.ScholarCourses.Update(data);
             var eff = _dbContext.SaveChanges();
             return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
         }
+
     }
 }
