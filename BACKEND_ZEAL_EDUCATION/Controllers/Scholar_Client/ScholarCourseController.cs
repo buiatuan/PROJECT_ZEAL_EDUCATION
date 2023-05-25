@@ -20,9 +20,9 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar_Client
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult GetListCourse()
+        public IActionResult GetListCourse([FromQuery] string name = "")
         {
-            var courseList = _dbContext.Courses.Where(m => m.Status == 1);
+            var courseList = _dbContext.Courses.Where(m => m.Status == 1 && (m.Name == name || name == ""));
             if (courseList == null)
             {
                 return NotFound(Message.NOT_FOUND_DATA);

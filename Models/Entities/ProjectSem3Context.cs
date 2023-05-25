@@ -47,7 +47,7 @@ public partial class ProjectSem3Context : DbContext
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__account__3213E83FAFC2A99F");
+            entity.HasKey(e => e.Id).HasName("PK__account__3213E83FE2F38331");
 
             entity.ToTable("account");
 
@@ -106,12 +106,12 @@ public partial class ProjectSem3Context : DbContext
 
             entity.HasOne(d => d.Role).WithMany(p => p.Accounts)
                 .HasForeignKey(d => d.RoleId)
-                .HasConstraintName("FK__account__roleId__5EBF139D");
+                .HasConstraintName("FK__account__roleId__4CA06362");
         });
 
         modelBuilder.Entity<Batch>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__batch__3213E83F1FFF9372");
+            entity.HasKey(e => e.Id).HasName("PK__batch__3213E83F87189D2C");
 
             entity.ToTable("batch");
 
@@ -147,7 +147,7 @@ public partial class ProjectSem3Context : DbContext
 
         modelBuilder.Entity<Course>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__course__3213E83FF6FC676E");
+            entity.HasKey(e => e.Id).HasName("PK__course__3213E83FC5AC5E36");
 
             entity.ToTable("course");
 
@@ -196,9 +196,7 @@ public partial class ProjectSem3Context : DbContext
             entity.Property(e => e.CreatedDate)
                 .HasColumnType("datetime")
                 .HasColumnName("createdDate");
-            entity.Property(e => e.Description)
-                .HasColumnType("text")
-                .HasColumnName("description");
+            entity.Property(e => e.Description).HasColumnName("description");
             entity.Property(e => e.EndTime)
                 .HasColumnType("datetime")
                 .HasColumnName("endTime");
@@ -217,7 +215,7 @@ public partial class ProjectSem3Context : DbContext
 
         modelBuilder.Entity<Exam>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__exam__3213E83F055656EC");
+            entity.HasKey(e => e.Id).HasName("PK__exam__3213E83FFF8CEEC3");
 
             entity.ToTable("exam");
 
@@ -251,12 +249,12 @@ public partial class ProjectSem3Context : DbContext
 
             entity.HasOne(d => d.Course).WithMany(p => p.Exams)
                 .HasForeignKey(d => d.CourseId)
-                .HasConstraintName("FK__exam__courseId__5FB337D6");
+                .HasConstraintName("FK__exam__courseId__4D94879B");
         });
 
         modelBuilder.Entity<Faculty>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__faculty__3213E83FA45DCB4E");
+            entity.HasKey(e => e.Id).HasName("PK__faculty__3213E83F090CB21F");
 
             entity.ToTable("faculty");
 
@@ -313,7 +311,7 @@ public partial class ProjectSem3Context : DbContext
 
         modelBuilder.Entity<ReportScholar>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__reportSc__3213E83F8647799F");
+            entity.HasKey(e => e.Id).HasName("PK__reportSc__3213E83F52EF3DBC");
 
             entity.ToTable("reportScholar");
 
@@ -347,12 +345,12 @@ public partial class ProjectSem3Context : DbContext
 
             entity.HasOne(d => d.Scholar).WithMany(p => p.ReportScholars)
                 .HasForeignKey(d => d.ScholarId)
-                .HasConstraintName("FK__reportSch__schol__6383C8BA");
+                .HasConstraintName("FK__reportSch__schol__5070F446");
         });
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__role__3213E83F5B9BC012");
+            entity.HasKey(e => e.Id).HasName("PK__role__3213E83F3622AB2F");
 
             entity.ToTable("role");
 
@@ -375,7 +373,7 @@ public partial class ProjectSem3Context : DbContext
 
         modelBuilder.Entity<Scholar>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__scholar__3213E83F01E9932E");
+            entity.HasKey(e => e.Id).HasName("PK__scholar__3213E83FD9B9C398");
 
             entity.ToTable("scholar");
 
@@ -390,20 +388,20 @@ public partial class ProjectSem3Context : DbContext
 
             entity.HasOne(d => d.Account).WithMany(p => p.Scholars)
                 .HasForeignKey(d => d.AccountId)
-                .HasConstraintName("FK__scholar__account__693CA210");
+                .HasConstraintName("FK__scholar__account__5165187F");
 
             entity.HasOne(d => d.Batch).WithMany(p => p.Scholars)
                 .HasForeignKey(d => d.BatchId)
-                .HasConstraintName("FK__scholar__batchId__66603565");
+                .HasConstraintName("FK__scholar__batchId__52593CB8");
 
             entity.HasOne(d => d.Faculty).WithMany(p => p.Scholars)
                 .HasForeignKey(d => d.FacultyId)
-                .HasConstraintName("FK__scholar__faculty__6754599E");
+                .HasConstraintName("FK__scholar__faculty__534D60F1");
         });
 
         modelBuilder.Entity<ScholarCourse>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__scholarC__3213E83F7AB356E8");
+            entity.HasKey(e => e.Id).HasName("PK__scholarC__3213E83FEBA461CE");
 
             entity.ToTable("scholarCourse");
 
@@ -425,16 +423,16 @@ public partial class ProjectSem3Context : DbContext
 
             entity.HasOne(d => d.Course).WithMany(p => p.ScholarCourses)
                 .HasForeignKey(d => d.CourseId)
-                .HasConstraintName("FK__scholarCo__cours__6B24EA82");
+                .HasConstraintName("FK__scholarCo__cours__5441852A");
 
             entity.HasOne(d => d.Scholar).WithMany(p => p.ScholarCourses)
                 .HasForeignKey(d => d.ScholarId)
-                .HasConstraintName("FK__scholarCo__schol__6A30C649");
+                .HasConstraintName("FK__scholarCo__schol__5535A963");
         });
 
         modelBuilder.Entity<ScholarExam>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__scholarE__3213E83F411D90C0");
+            entity.HasKey(e => e.Id).HasName("PK__scholarE__3213E83FA28E845F");
 
             entity.ToTable("scholarExam");
 
@@ -449,11 +447,11 @@ public partial class ProjectSem3Context : DbContext
 
             entity.HasOne(d => d.Exam).WithMany(p => p.ScholarExams)
                 .HasForeignKey(d => d.ExamId)
-                .HasConstraintName("FK__scholarEx__examI__6EF57B66");
+                .HasConstraintName("FK__scholarEx__examI__5629CD9C");
 
             entity.HasOne(d => d.Scholar).WithMany(p => p.ScholarExams)
                 .HasForeignKey(d => d.ScholarId)
-                .HasConstraintName("FK__scholarEx__schol__6FE99F9F");
+                .HasConstraintName("FK__scholarEx__schol__571DF1D5");
         });
 
         OnModelCreatingPartial(modelBuilder);
