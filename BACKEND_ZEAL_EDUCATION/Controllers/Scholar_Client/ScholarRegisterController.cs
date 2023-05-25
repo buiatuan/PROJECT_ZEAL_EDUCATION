@@ -106,7 +106,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar_Client
             if (scholarAccount == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
             var scholar = _dbContext.Scholars.FirstOrDefault(m => m.AccountId == scholarAccount.Id);
             if (scholar == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
-            var scholarCourse = _dbContext.ScholarCourses.FirstOrDefault(m => m.Id == id && m.ScholarId == scholar.Id);
+            var scholarCourse = _dbContext.ScholarCourses.FirstOrDefault(m => m.CourseId == id && m.ScholarId == scholar.Id);
             if (scholarCourse == null) return NotFound(Message.NOT_FOUND_DATA);
             if (scholarCourse.Status == 1) return Conflict(Message.COURSE_HAS_REGISTER);
             _dbContext.ScholarCourses.Remove(scholarCourse);

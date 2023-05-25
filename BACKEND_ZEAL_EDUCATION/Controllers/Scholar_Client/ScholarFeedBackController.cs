@@ -41,6 +41,28 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar_Client
             return Ok(data);
         }
 
+        [HttpPost]
+        public IActionResult SendFeedback([FromBody] SendFeedbackModel model)
+        {
+            var username = getCurrentUsernameLogin();
+            var scholarAccount = _dbContext.Accounts.FirstOrDefault(m => m.Username == username);
+            if (scholarAccount == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
+            var scholar = _dbContext.Scholars.FirstOrDefault(m => m.AccountId == scholarAccount.Id);
+            if (scholar == null) return NotFound(Message.NOT_FOUND_SCHOLAR);
+
+            var feedback = new FeedBack
+            {
+                CreateDate = DateTime.Now,
+                CourseId = model.CourseId,
+                CreateBy = scholar.Id,
+                Message = model.Message,
+                Title = model.Title,
+            };
+            _dbContext.FeedBacks.Add(feedback);
+            var eff = _dbContext.SaveChanges();
+            return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
+        }
+
         [HttpPut("{id:int}")]
         public IActionResult EditMyFeedBack([FromRoute] int id, [FromBody] EditMyFeedBackmodel model)
         {

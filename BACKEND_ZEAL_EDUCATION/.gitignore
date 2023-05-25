@@ -28,6 +28,7 @@ Obj/
 .vs/
 /wwwroot/dist/
 Note.txt
+appsettings.json
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
