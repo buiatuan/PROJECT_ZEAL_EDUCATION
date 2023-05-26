@@ -9,6 +9,7 @@ using Models.Models.Response.CourseResponse;
 using static System.Net.Mime.MediaTypeNames;
 using Models.Models.Response.CourseRegisterResponse;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Models.Models.Response;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
 {
@@ -124,6 +125,25 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
             _dbContext.ScholarCourses.Update(data);
             var eff = _dbContext.SaveChanges();
             return eff > 0 ? Ok(Message.SUCCESS) : BadRequest(Message.FAILED);
+        }
+
+        [HttpGet]
+        public IActionResult GetListCourseRegister() 
+        {
+            var result = _dbContext.ScholarCourses.Where(m => m.Status == 3).Select(m => 
+                new ScholarCourseRegisterViewable
+                {
+                    Id= m.Id,
+                    CourseId= m.CourseId,
+                    Status= m.Status,
+                    CreatedDate= m.CreatedDate,
+                    ScholarId= m.ScholarId,
+                    Scholar = m.Scholar != null ? m.Scholar.Account : null,
+                    Course= m.Course,
+                    Purchased= m.Purchased,
+                    TuitionFees = m.TuitionFees
+                }).ToList();
+            return Ok(result);
         }
 
     }
