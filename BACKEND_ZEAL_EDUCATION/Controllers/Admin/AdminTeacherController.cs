@@ -46,6 +46,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
                 Status = 1,
                 CreatedDate = DateTime.Now,
                 RoleId = 2,
+                DateOfbirth = model.DateOfbirth
             };
             _dbContext.Accounts.Add(teacher);
             var eff = _dbContext.SaveChanges();
