@@ -23,5 +23,8 @@ namespace Common
 
         public static string UCOURSE_CODE_ALREADY_EXIST = "Course code already exist";
         public static string COURSE_HAS_REGISTER = "Course has register";
+
+        public static string INVALID_END_TIME = "End time must be greater than start";
+
     }
 }

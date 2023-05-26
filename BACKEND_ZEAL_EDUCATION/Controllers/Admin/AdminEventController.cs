@@ -34,12 +34,14 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         [HttpPost]
         public IActionResult Create([FromBody] EventCreateModel model)
         {
+            if (model.StartDate > model.EndTime) return BadRequest(Message.INVALID_END_TIME);
             var newEvent = new Event
             {
                 Name = model.Name,
                 CreatedDate = DateTime.Now,
                 CreatedBy = "System",
                 Description = model.Description,
+                EndTime = model.EndTime,
                 Location = model.Location,
                 StartDate = model.StartDate,
                 Status = model.Status,
@@ -54,9 +56,11 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         {
             var data = _dbContext.Events.Find(id);
             if (data == null) return NotFound(Message.NOT_FOUND_EVENT);
+            if (model.StartDate > model.EndTime) return BadRequest(Message.INVALID_END_TIME);
             data.Name = model.Name;
             data.Description = model.Description;
             data.Location = model.Location;
+            data.EndTime= model.EndTime;
             data.StartDate = model.StartDate;
             data.Status = model.Status;
             _dbContext.Events.Update(data);

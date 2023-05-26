@@ -74,6 +74,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         [HttpPost]
         public IActionResult Create([FromBody] ExamCreateModel model)
         {
+            if (model.StartDate > model.EndDate) return BadRequest(Message.INVALID_END_TIME);
             var data = new Exam
             {
                 ExamCode = model.ExamCode,

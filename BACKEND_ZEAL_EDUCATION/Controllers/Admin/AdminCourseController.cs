@@ -24,7 +24,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         [HttpGet]
         public IActionResult GetListCourse([FromQuery] int? status = null)
         {
-            var courseList = _dbContext.Courses.Where(m => (m.Status == status || status == null));
+            var courseList = _dbContext.Courses.Where(m => (m.Status == status || status == null)).OrderByDescending(m => m.Id);
             if (courseList == null)
                 return NotFound(Message.NOT_FOUND_COURSE);
             return Ok(courseList);
