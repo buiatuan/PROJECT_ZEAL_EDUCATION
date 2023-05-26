@@ -2,6 +2,7 @@
 using Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Models.Entities;
 using Models.Models.Response;
 
@@ -19,7 +20,15 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         [HttpGet]
         public IActionResult GetList()
         {
-            return Ok(_dbContext.FeedBacks);
+            var result = _dbContext.FeedBacks.Select(m => new FeedbackViewable
+            {
+                Id = m.Id,
+                CreateDate= m.CreateDate,
+                Account = m.CreateByNavigation != null ? m.CreateByNavigation.Account : null,
+                Message= m.Message,
+                Course = m.Course 
+            });
+            return Ok(result);
         }
 
         [HttpGet("{id:int}")]

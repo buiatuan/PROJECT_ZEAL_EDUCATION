@@ -15,5 +15,6 @@ namespace Models.Models.Response
         public int? CreateBy { get; set; }
         public DateTime? CreateDate { get; set; }
         public Account? Account { get; set; }
+        public Course? Course { get; set; }
     }
 }
