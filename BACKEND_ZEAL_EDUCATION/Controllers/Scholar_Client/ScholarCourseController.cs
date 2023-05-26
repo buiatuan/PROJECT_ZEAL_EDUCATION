@@ -22,7 +22,7 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Scholar_Client
         [HttpGet]
         public IActionResult GetListCourse([FromQuery] string name = "")
         {
-            var courseList = _dbContext.Courses.Where(m => m.Status == 1 && (m.Name == name || name == ""));
+            var courseList = _dbContext.Courses.Where(m => m.Status == 1 && (m.Name != null && m.Name.Contains(name) || name == ""));
             if (courseList == null)
             {
                 return NotFound(Message.NOT_FOUND_DATA);
