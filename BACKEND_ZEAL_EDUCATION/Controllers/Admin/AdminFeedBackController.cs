@@ -3,6 +3,7 @@ using Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Entities;
+using Models.Models.Response;
 
 namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
 {
@@ -19,6 +20,22 @@ namespace BACKEND_ZEAL_EDUCATION.Controllers.Admin
         public IActionResult GetList()
         {
             return Ok(_dbContext.FeedBacks);
+        }
+
+        [HttpGet("{id:int}")]
+        public IActionResult GetDetail(int id) 
+        {
+            var feedback = _dbContext.FeedBacks.Where(x => x.Id == id).Select(m => 
+            new FeedbackViewable
+            {
+                Id = m.Id,
+                Title = m.Title,
+                Message= m.Message,
+                Account = m.CreateByNavigation != null ? m.CreateByNavigation.Account : null,
+                CreateDate= m.CreateDate,
+            });
+            if (feedback == null) return BadRequest(Message.NOT_FOUNT_FEEDBACK);
+            return Ok(feedback);
         }
 
         [HttpDelete("{id:int}")]
