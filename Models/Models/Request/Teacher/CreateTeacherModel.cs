@@ -21,5 +21,6 @@ namespace Models.Models.Request.Teacher
         public int? Age { get; set; }
         public string? Gender { get; set; }
         public string? Address { get; set; }
+        public DateTime? DateOfbirth { get; set; }
     }
 }
