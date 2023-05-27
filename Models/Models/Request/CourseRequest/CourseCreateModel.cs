@@ -10,11 +10,11 @@ namespace Models.Models.Request.CourseRequest
     public class CourseCreateModel
     {
         [Required]
-        public string? CourseCode { get; set; }
+        public string CourseCode { get; set; }
         [Required]
-        public string? Name { get; set; }
+        public string Name { get; set; }
         [Required]
-        public decimal? TuitionFees { get; set; }
+        public decimal TuitionFees { get; set; }
         [Required]
         public string? CourseType { get; set; }
         public string? Descreption { get; set; }
