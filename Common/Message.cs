@@ -18,7 +18,7 @@ namespace Common
         public static string NOT_FOUND_EXAM = "Not found exam";
         public static string NOT_FOUND_ACCOUNT = "Not found account";
         public static string NOT_FOUND_FEEDBACK = "Not found feed back";
-
+        public static string NOT_FOUND_BATCH = "Not found batch";
         public static string USERNAME_MATCHING = "The username account has existed!";
 
         public static string UCOURSE_CODE_ALREADY_EXIST = "Course code already exist";
