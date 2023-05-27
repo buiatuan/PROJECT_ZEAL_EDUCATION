@@ -27,6 +27,7 @@ namespace Common
         public static string INVALID_END_TIME = "End time must be greater than start";
 
         public static string NOT_FOUNT_FEEDBACK = "Not found feedback.";
+        public static string NOT_FOUND_BATCH = "Not found batch";
 
     }
 }
